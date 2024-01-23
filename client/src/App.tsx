@@ -1,5 +1,13 @@
-export default function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./page/Main";
+const App = () => {
   return (
-    <button className="btn btn-primary" >Button</button>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;
