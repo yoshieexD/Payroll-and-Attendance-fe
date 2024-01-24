@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { Provider } from 'react-redux';
 import store from './store/index';
+import { Toaster } from 'react-hot-toast';
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,6 +18,7 @@ root.render(
       <Provider store={store}>
         <App />
         <ReactQueryDevtools />
+        <Toaster position="top-center" reverseOrder={false} />
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>

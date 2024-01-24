@@ -1,8 +1,8 @@
 import { Types } from '../constants/actionTypes';
 
 const initialState = {
-    userName: '',
-    email: '',
+    user: null,
+    isAuth: false,
 };
 
 const userReducer = (state = initialState, action: any) => {
@@ -10,6 +10,7 @@ const userReducer = (state = initialState, action: any) => {
         case Types.LOGIN:
             return {
                 ...state,
+                isAuth: true,
                 user: action.payload.user,
             };
         case Types.UPDATE_USER:

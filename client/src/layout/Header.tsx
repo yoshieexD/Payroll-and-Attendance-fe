@@ -1,7 +1,13 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { userAction } from '../actions/userAction';
 import http from '../api/http-common';
+import { RootState } from '../store';
 import { useMutation } from 'react-query';
+import { toast } from 'react-hot-toast';
 const Header = () => {
+    const dispatch = useDispatch();
+    const auth = useSelector((state: RootState) => state.user);
     const [data, setData] = useState({ userName: '', password: '' })
     const openModal = (status: string) => {
         const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
@@ -21,11 +27,12 @@ const Header = () => {
         },
         {
             onSuccess: (data) => {
-                console.log('Login successful', data);
-            },
-            onError: (error) => {
-                console.error('Login error', error);
-            },
+                dispatch(userAction.login(data.auth))
+                const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+                modal.close();
+            }, onError: () => {
+                toast.error('Invalid credentials.')
+            }
         }
     )
     const handleSubmit = (event: any) => {
@@ -37,9 +44,10 @@ const Header = () => {
             <div className="w-11/12 flex justify-between pt-2">
                 <div>Logo</div>
                 <div>
-                    <button className="btn btn-neutrals" onClick={() => openModal('open')}>
-                        Login
-                    </button>
+                    {auth?.isAuth === true ? <p className='py-2'>{auth?.user.username}</p> :
+                        <button className="btn btn-neutrals" onClick={() => openModal('open')}>
+                            Login
+                        </button>}
                 </div>
             </div>
 

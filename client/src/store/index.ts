@@ -1,15 +1,21 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose, StoreEnhancer } from 'redux';
 import { thunk } from 'redux-thunk';
-
 import userReducer from '../reducers/userReducer';
-
+export interface RootState {
+    user: {
+        isAuth: boolean;
+        user: any;
+    };
+}
 const rootReducer = combineReducers({
     user: userReducer,
 });
 
-const store = createStore(
+const storeEnhancer: StoreEnhancer = applyMiddleware(thunk);
+
+const store = createStore<RootState, any, any, any>(
     rootReducer,
-    compose(applyMiddleware(thunk))
+    compose(storeEnhancer)
 );
 
 export default store;
