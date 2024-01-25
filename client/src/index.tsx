@@ -18,7 +18,9 @@ root.render(
       <Provider store={store}>
         <App />
         <ReactQueryDevtools />
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={false} toastOptions={{
+          duration: 1000,
+        }} />
       </Provider>
     </QueryClientProvider>
   </React.StrictMode>
