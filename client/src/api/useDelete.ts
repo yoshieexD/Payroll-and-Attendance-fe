@@ -2,36 +2,31 @@ import { useMutation, UseMutationResult, useQueryClient } from 'react-query';
 import http from './http-common';
 import { toast } from 'react-hot-toast';
 
-interface usePostProps {
+interface useDeleteProps {
     url: string;
     onSuccess: (data: any) => void;
-    onError?: () => void;
-    errors: String,
-    datas: Record<string, any>;
-    query?: String
+    errors: string;
+    query?: string;
 }
 
-const usePost = ({ url, onSuccess, onError, errors, datas, query }: usePostProps): UseMutationResult => {
+const useDelete = ({ url, onSuccess, errors, query }: useDeleteProps): UseMutationResult => {
     const queryClient = useQueryClient();
+
     return useMutation(
         async () => {
-            const response = await http.post(url, datas);
+            const response = await http.delete(url);
             return response.data;
         },
         {
             onSuccess: async (data) => {
                 onSuccess(data);
-                await queryClient.invalidateQueries(`${query}`)
-
+                await queryClient.invalidateQueries(`${query}`);
             },
             onError: () => {
                 toast.error(`${errors}`);
-                if (onError) {
-                    onError();
-                }
             },
         }
     );
 };
 
-export default usePost;
+export default useDelete;

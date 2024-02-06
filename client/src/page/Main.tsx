@@ -30,8 +30,11 @@ const Main = () => {
         datas: data,
         onSuccess: () => {
             toast.success('Successfully added employee');
+            const modal = document.getElementById('add_employee') as HTMLDialogElement;
+            modal.close();
         },
         errors: 'Uncaught error',
+        query: 'get-employee',
     })
     return (
         <Layout classname="overflow-hidden">

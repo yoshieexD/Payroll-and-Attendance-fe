@@ -13,6 +13,7 @@ function EmployeeTable() {
                         <th>Email</th>
                         <th>Name</th>
                         <th>Employment Type</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -24,6 +25,10 @@ function EmployeeTable() {
                                     <td>{e.email}</td>
                                     <td>{e.name}</td>
                                     <td>{e.employmentType}</td>
+                                    <td className='space-x-2'>
+                                        <button className="btn btn-accent">View</button>
+                                        <button className="btn btn-error">Delete</button>
+                                    </td>
                                 </tr>
                             ))
                         ) : (
