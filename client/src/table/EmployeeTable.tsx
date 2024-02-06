@@ -5,7 +5,7 @@ import useGet from "../api/useGet";
 function EmployeeTable() {
     const { data } = useGet({ getQuery: 'get-employee', url: '/employee/get' })
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full">
             <table className="table">
                 <thead>
                     <tr>
@@ -17,10 +17,10 @@ function EmployeeTable() {
                 </thead>
                 <tbody>
                     {
-                        data.length > 0 ? (
-                            data?.map((e: IEmployee) => (
+                        data?.length > 0 ? (
+                            data?.map((e: IEmployee, index: number) => (
                                 <tr key={e._id}>
-                                    <th>1</th>
+                                    <th>{index + 1}</th>
                                     <td>{e.email}</td>
                                     <td>{e.name}</td>
                                     <td>{e.employmentType}</td>
