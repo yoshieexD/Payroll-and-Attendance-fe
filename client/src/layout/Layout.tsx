@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import Header from './Header';
 interface Props {
     children: ReactNode;
-    classname: String
+    classname?: String
 }
 
 const Layout: FC<Props> = ({ children, classname }) => {

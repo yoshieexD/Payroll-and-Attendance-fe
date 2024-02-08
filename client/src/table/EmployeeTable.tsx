@@ -3,13 +3,14 @@ import useGet from "../api/useGet";
 import { useState } from 'react';
 import useDelete from '../api/useDelete';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function EmployeeTable() {
     const { data } = useGet({ getQuery: 'get-employee', url: '/employee/get' })
+    const navigate = useNavigate();
     const [ids, setIds] = useState('');
-    const [open, setOpen] = useState('');
 
     const deletes: any = useDelete({
         url: `/employee/delete/${ids}`,
@@ -42,7 +43,7 @@ function EmployeeTable() {
                                     <td>{e.name}</td>
                                     <td>{e.employmentType}</td>
                                     <td className='space-x-2'>
-                                        <button className="btn btn-accent" onClick={async () => { await setIds(e._id); setOpen('open') }}>View</button>
+                                        <button className="btn btn-accent" onClick={async () => { await navigate(`/${e._id}`); }}>View</button>
                                         <button className="btn btn-error" onClick={async () => { await setIds(e._id); deletes.mutate(); }}>Delete</button>
                                     </td>
                                 </tr>
